@@ -65,9 +65,9 @@ export default function ProductList() {
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
         index: number,
     ) => {
-        del(event,index);
-        show();
-        console.log(products);
+        products.splice(index,1);
+        setProducts([...products]);
+        setNewProduct({ ...newProduct, visible: true })
     };
     
     const e = (
