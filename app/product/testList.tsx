@@ -18,19 +18,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 import { Box, Button, List, ListItem, ListItemText, TextField } from "@mui/material";
 import useProducts from "./useProducts";
+import English from "./test1";
 
-export default function ProductList() {
-    // let products = [
-    //     { desc: "iPad", price: 20000 },
-    //     { desc: "iPhone 8", price: 20000 },
-    //     { desc: "iPhone X", price: 30000 }
-    // ];
-    // const [products, setProducts] = useState([
-    //     { desc: "iPad", price: 20000 },
-    //     { desc: "iPhone 8", price: 20000 },
-    //     { desc: "iPhone X", price: 30000 }
-    // ])
-    const [products, setProducts] = useProducts();
+export default function EnglishList() {
+    const [english, setEnglish] = English();
     const [selectedIndex, setSelectedIndex] = React.useState(1);
 
     const handleListItemClick = (
@@ -40,44 +31,44 @@ export default function ProductList() {
         setSelectedIndex(index);
     };
 
-    const [newProduct, setNewProduct] = useState({ visible: false, desc: "", price: 0 })
-    const handleClick = function (e: React.ChangeEvent<HTMLInputElement>) {
-        setNewProduct({ ...newProduct, [e.target.name]: e.target.value })
-    }
-    const show = () => {
-        setNewProduct({ ...newProduct, visible: true })
-    }
-    const hide = () => {
-        setNewProduct({ ...newProduct, visible: false })
-    }
-    function update() {
-        setProducts(() => [...products, newProduct]);
-        setNewProduct({ ...newProduct, visible: false })
-        console.log(products);
-    }
-    const del = (
-        event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-        index: number,
-    ) => {
-        products.splice(index,1);
-        setProducts([...products]);
-        console.log(products);
-    };
-    const ed = (
-        event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-        index: number,
-    ) => {
-        products.splice(index,1);
-        setProducts([...products]);
-        setNewProduct({ ...newProduct, visible: true })
-    };
+    // const [newProduct, setNewProduct] = useState({ visible: false, desc: "", price: 0 })
+    // const handleClick = function (e: React.ChangeEvent<HTMLInputElement>) {
+    //     setNewProduct({ ...newProduct, [e.target.name]: e.target.value })
+    // }
+    // const show = () => {
+    //     setNewProduct({ ...newProduct, visible: true })
+    // }
+    // const hide = () => {
+    //     setNewProduct({ ...newProduct, visible: false })
+    // }
+    // function update() {
+    //     English(() => [...english, newProduct]);
+    //     setNewProduct({ ...newProduct, visible: false })
+    //     console.log(products);
+    // }
+    // const del = (
+    //     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    //     index: number,
+    // ) => {
+    //     products.splice(index,1);
+    //     setProducts([...products]);
+    //     console.log(products);
+    // };
+    // const ed = (
+    //     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    //     index: number,
+    // ) => {
+    //     products.splice(index,1);
+    //     setProducts([...products]);
+    //     setNewProduct({ ...newProduct, visible: true })
+    // };
     
-    const e = (
-        event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-        index: number,
-    ) => {
+    // const e = (
+    //     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    //     index: number,
+    // ) => {
         
-    };
+    // };
     return (
         <Box sx={{
             width: '80vw',
@@ -86,7 +77,7 @@ export default function ProductList() {
             color: 'black',
             textAlign: 'left'
         }}>
-            <Fab color="primary" aria-label="Add" onClick={show}>
+            {/* <Fab color="primary" aria-label="Add" onClick={show}>
                 <AddIcon />
             </Fab>
             <Dialog open={newProduct.visible} onClose={hide} aria-labelledby="新增產品">
@@ -109,26 +100,26 @@ export default function ProductList() {
                     </IconButton>
                     <Button variant="contained" color="primary" onClick={update}>新增</Button>
                 </DialogActions>
-            </Dialog>
+            </Dialog> */}
             
             <div>
                 {/* <button onClick={show}>新增產品</button> */}
-                <List subheader="Product list" aria-label="product list">
-                    {products.map((product, i) =>
+                <List subheader="English list" aria-label="english list">
+                    {english.map((english, i) =>
 
-                        <ListItem divider key={product.desc}>
+                        <ListItem divider key={english.a}>
                             <ListItemButton
                                 selected={selectedIndex === i}
                                 onClick={(event) => handleListItemClick(event, i)}
                             >
-                                <ListItemText primary={product.desc} secondary={product.price}>
+                                <ListItemText primary={english.a} secondary={english.b}>
                                 </ListItemText>
-                                <IconButton edge="end" aria-label="edit" onClick={(event) => ed(event, i)}>
+                                {/* <IconButton edge="end" aria-label="edit" onClick={(event) => ed(event, i)}>
                                     <EditIcon />
                                 </IconButton>
                                 <IconButton edge="end" aria-label="delete" onClick={(event) => del(event, i)}>
                                     <DeleteIcon />
-                                </IconButton>
+                                </IconButton> */}
                             </ListItemButton>
                         </ListItem>
 
