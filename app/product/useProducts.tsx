@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 export default function useProducts() {
   const db = getFirestore(app);
   const [products, setProducts] = useState<{ desc: string, price: number }[]>([
-    { desc: "iPad", price: 20000 },
-    { desc: "iPhone 8", price: 20000 },
-    { desc: "iPhone X", price: 30000 }
+    // { desc: "iPad", price: 20000 },
+    // { desc: "iPhone 8", price: 20000 },
+    // { desc: "iPhone X", price: 30000 }
   ])
 
   // let data = [
@@ -24,7 +24,7 @@ export default function useProducts() {
     async function fetchData() {
       setIsLoading(true);
       let data: { desc: string, price: number }[] = [];
-      const productRef = collection(db, "product")
+      const productRef = collection(db, "ProductDate")
       const productQuery = query(productRef, orderBy("price"));
       const querySnapshot = await getDocs(productQuery);
       querySnapshot.forEach((doc) => {
@@ -39,7 +39,7 @@ export default function useProducts() {
 
   async function addProduct(product: { desc: string, price: number }) {
     const db = getFirestore(app);
-    const docRef = await addDoc(collection(db, "product"),
+    const docRef = await addDoc(collection(db, "ProductDate"),
       { desc: product.desc, price: product.price });
     console.log("Document written with ID: ", docRef.id);
     setUpdated((currentValue) => currentValue + 1)

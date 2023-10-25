@@ -10,7 +10,7 @@ function English() {
 
 //   async function fetchData() {
 //     let data: { desc: string, price: number }[] = [];
-//     const querySnapshot = await getDocs(collection(db, "product"));
+//     const querySnapshot = await getDocs(collection(db, "ProductDate"));
 //     querySnapshot.forEach((doc) => {
 //       data.push({ desc: doc.data().desc, price: doc.data().price })
 //       console.log(`${doc.id} => ${doc.data()}`);

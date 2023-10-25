@@ -8,8 +8,8 @@ export default function Home() {
     <h1>Hello</h1>
     <h2>我是吳濟聰</h2>
     <MyButton/>
-    <ProductList />
     <Click /> 
+    <ProductList />
   </div>
   )
 }
