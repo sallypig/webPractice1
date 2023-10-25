@@ -11,7 +11,7 @@ import DraftsIcon from '@mui/icons-material/Drafts';
 // import ListItem from "@mui/material/ListItem";
 import { useState } from "react";
 import { AccessAlarm, ThreeDRotation } from '@mui/icons-material';
-import { Dialog, DialogActions, DialogContent, DialogTitle, Fab, IconButton } from '@mui/material';
+import { CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Fab, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
@@ -30,8 +30,9 @@ export default function ProductList() {
     //     { desc: "iPhone 8", price: 20000 },
     //     { desc: "iPhone X", price: 30000 }
     // ])
-    const [products, setProducts] = useProducts();
+    const [products, setProducts, addProduct, isLoading] = useProducts();
     const [selectedIndex, setSelectedIndex] = React.useState(1);
+    const [updated, setUpdated] = useState(0);
 
     const handleListItemClick = (
         event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -42,7 +43,13 @@ export default function ProductList() {
 
     const [newProduct, setNewProduct] = useState({ visible: false, desc: "", price: 0 })
     const handleClick = function (e: React.ChangeEvent<HTMLInputElement>) {
-        setNewProduct({ ...newProduct, [e.target.name]: e.target.value })
+        // setNewProduct({ ...newProduct, [e.target.name]: e.target.value })
+        if (e.target.name === "price") {
+            setNewProduct({ ...newProduct, [e.target.name]: parseInt(e.target.value) })
+        }
+        else {
+            setNewProduct({ ...newProduct, [e.target.name]: e.target.value })
+        }
     }
     const show = () => {
         setNewProduct({ ...newProduct, visible: true })
@@ -59,7 +66,7 @@ export default function ProductList() {
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
         index: number,
     ) => {
-        products.splice(index,1);
+        products.splice(index, 1);
         setProducts([...products]);
         console.log(products);
     };
@@ -67,17 +74,30 @@ export default function ProductList() {
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
         index: number,
     ) => {
-        products.splice(index,1);
+        products.splice(index, 1);
         setProducts([...products]);
         setNewProduct({ ...newProduct, visible: true })
     };
-    
+
     const e = (
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
         index: number,
     ) => {
-        
+
     };
+    function add() {
+        addProduct(newProduct);
+        setNewProduct({ ...newProduct, visible: false })
+        console.log(products);
+    }
+    //   const handleClick2 = function (e: React.ChangeEvent<HTMLInputElement>) {
+    //     if (e.target.name === "price") {
+    //       setNewProduct({ ...newProduct, [e.target.name]: parseInt(e.target.value) })
+    //     }
+    //     else {
+    //       setNewProduct({ ...newProduct, [e.target.name]: e.target.value })
+    //     }
+    //   }
     return (
         <Box sx={{
             width: '80vw',
@@ -107,33 +127,35 @@ export default function ProductList() {
                     >
                         <CloseIcon />
                     </IconButton>
-                    <Button variant="contained" color="primary" onClick={update}>新增</Button>
+                    <Button variant="contained" color="primary" onClick={add}>新增</Button>
                 </DialogActions>
             </Dialog>
-            
+
             <div>
                 {/* <button onClick={show}>新增產品</button> */}
-                <List subheader="Product list" aria-label="product list">
-                    {products.map((product, i) =>
+                {isLoading ? <CircularProgress /> :
+                    <List subheader="Product list" aria-label="product list">
+                        {products.map((product, i) =>
 
-                        <ListItem divider key={product.desc}>
-                            <ListItemButton
-                                selected={selectedIndex === i}
-                                onClick={(event) => handleListItemClick(event, i)}
-                            >
-                                <ListItemText primary={product.desc} secondary={product.price}>
-                                </ListItemText>
-                                <IconButton edge="end" aria-label="edit" onClick={(event) => ed(event, i)}>
-                                    <EditIcon />
-                                </IconButton>
-                                <IconButton edge="end" aria-label="delete" onClick={(event) => del(event, i)}>
-                                    <DeleteIcon />
-                                </IconButton>
-                            </ListItemButton>
-                        </ListItem>
+                            <ListItem divider key={product.desc}>
+                                <ListItemButton
+                                    selected={selectedIndex === i}
+                                    onClick={(event) => handleListItemClick(event, i)}
+                                >
+                                    <ListItemText primary={product.desc} secondary={product.price}>
+                                    </ListItemText>
+                                    <IconButton edge="end" aria-label="edit" onClick={(event) => ed(event, i)}>
+                                        <EditIcon />
+                                    </IconButton>
+                                    <IconButton edge="end" aria-label="delete" onClick={(event) => del(event, i)}>
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </ListItemButton>
+                            </ListItem>
 
-                    )}
-                </List>
+                        )}
+                    </List>
+                }
             </div>
 
         </Box>
