@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import ProductList from './product/productList'
 import EnglishList from './product/testList'
+import Home from './product/home'
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -58,12 +59,13 @@ export default function BasicTabs() {
       </Box>
       <CustomTabPanel value={value} index={0}>
         首頁
+        <Home />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-      <ProductList />
+        <ProductList />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        <EnglishList/>
+        <EnglishList />
       </CustomTabPanel>
     </Box>
   );
